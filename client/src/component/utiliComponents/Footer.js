@@ -10,7 +10,7 @@ const Footer = () => {
 			fixed='bottom'
 			className='justify-content-end mt-5 flex-column'
 		>
-			<Navbar.Text>DSR Tool v1.3.0 </Navbar.Text>
+			<Navbar.Text>DSR Tool v1.4.2 </Navbar.Text>
 			<Navbar.Text style={{ display: 'block' }}>
 				In case of alarm monitoring problems e-mail to{' '}
 				<a href='mailto: kirill.klimov@kcell.kz'>Kirill Klimov</a>

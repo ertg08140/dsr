@@ -55,6 +55,10 @@ export const userLogin = (username, password, DSR) => async (dispatch) => {
 		localStorage.setItem('gooduntil', data.data.gooduntil);
 		localStorage.setItem('username', username);
 		localStorage.setItem('userRole', resp.data.role);
+		localStorage.setItem(
+			'userAlarmFilter',
+			JSON.stringify(sortBy(resp.data.alarmFilter, 'alarmId'))
+		);
 	} catch (error) {
 		dispatch({
 			type: USER_LOGIN_FAIL,
@@ -71,6 +75,7 @@ export const userLogout = () => async (dispatch) => {
 	localStorage.removeItem('username');
 	localStorage.removeItem('gooduntil');
 	localStorage.removeItem('userRole');
+	localStorage.removeItem('userAlarmFilter');
 	document.location.href = '/login';
 };
 
@@ -94,6 +99,7 @@ export const checkTokenValidity =
 			localStorage.removeItem('username');
 			localStorage.removeItem('gooduntil');
 			localStorage.removeItem('userRole');
+			localStorage.removeItem('userAlarmFilter');
 		}
 	};
 

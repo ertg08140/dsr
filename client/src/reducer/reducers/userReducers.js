@@ -16,8 +16,9 @@ const initialState = {
 	gooduntil: localStorage.getItem('gooduntil'),
 	username: localStorage.getItem('username'),
 	userRole: localStorage.getItem('userRole'),
+	userAlarmFilter: JSON.parse(localStorage.getItem('userAlarmFilter')),
 	userId: null,
-	userAlarmFilter: [],
+
 	errorMessage: '',
 	loading: false
 };

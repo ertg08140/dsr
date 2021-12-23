@@ -1,6 +1,7 @@
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import BoltIcon from '@mui/icons-material/Bolt';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Container from 'react-bootstrap/Container';
@@ -62,9 +63,33 @@ const Home = () => {
 								/>
 								<hr />
 								View diameter peers list and current status from Ala_SOAM,
-								Nur_SOAM, NOAM.
+								Nur_SOAM.
 							</Card.Text>
 							<Button variant='primary'>Check Diameter Peers</Button>
+						</Card.Body>
+					</Card>
+				</LinkContainer>
+
+				<LinkContainer to='/stp'>
+					<Card
+						style={{ width: '18rem' }}
+						className='text-center  me-3 shadow-lg'
+					>
+						<Card.Body style={{ cursor: 'pointer' }}>
+							<Card.Title>STP</Card.Title>
+							<Card.Subtitle className='mb-2 text-muted'>
+								View STP peers
+							</Card.Subtitle>
+							<hr />
+							<Card.Text>
+								<BoltIcon
+									className='m-auto'
+									sx={{ fontSize: 80, color: 'green' }}
+								/>
+								<hr />
+								View STP peers list and current status from Ala_SOAM, Nur_SOAM.
+							</Card.Text>
+							<Button variant='primary'>Check STP Peers</Button>
 						</Card.Body>
 					</Card>
 				</LinkContainer>

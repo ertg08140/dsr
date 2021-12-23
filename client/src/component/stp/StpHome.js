@@ -2,38 +2,35 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { nodeCheck } from '../../reducer/actions/checkActions';
+import { stpNodesCheck } from '../../reducer/actions/stpActions';
 import { checkTokenValidity } from '../../reducer/actions/userActions';
 
 import Error from '../utiliComponents/Error';
 import Loader from '../utiliComponents/Spinner';
-import DiamTable from './DiamTable';
-
+import StpTable from './StpTable';
 import DsrTab from '../utiliComponents/DsrTab';
 
-const DiamHome = () => {
-	const user = useSelector((state) => state.userReducer);
-	const node = useSelector((state) => state.nodeCheckReducer);
-
+const StpHome = () => {
 	const [dsrName, setDsrName] = useState('ala');
-
+	const user = useSelector((state) => state.userReducer);
+	const { stpNodes, loading, errorMessage } = useSelector(
+		(state) => state.stpNodesReducer
+	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(checkTokenValidity());
 		if (user.token) {
-			dispatch(nodeCheck(dsrName));
+			dispatch(stpNodesCheck());
 		} else {
 			return <Redirect to='/login' />;
 		}
-	}, [dispatch, user.token, dsrName]);
-
-	const nodes = node.nodes;
+	}, [dispatch, user.token]);
 
 	const handleRefresh = () => {
 		dispatch(checkTokenValidity());
 		if (user.token) {
-			dispatch(nodeCheck(dsrName));
+			dispatch(stpNodesCheck(dsrName));
 		} else {
 			return <Redirect to='/login' />;
 		}
@@ -41,25 +38,22 @@ const DiamHome = () => {
 
 	const handleSelectTab = (dsrName) => {
 		setDsrName(dsrName);
-		dispatch(nodeCheck(dsrName));
+		dispatch(stpNodesCheck(dsrName));
 	};
 
 	return (
 		<>
-			{node.errorMessage && (
-				<Error errorMessage={node.errorMessage} variant='danger' />
-			)}
-			{node.loading && <Loader />}
-
+			{errorMessage && <Error errorMessage={errorMessage} variant='danger' />}
+			{loading && <Loader />}
 			<DsrTab
 				dsrName={dsrName}
-				refreshButtonText={'Refresh Diameter Peers List'}
+				refreshButtonText={'Refresh STP Peers List'}
 				handleRefresh={handleRefresh}
 				handleSelectTab={handleSelectTab}
 			/>
-			<DiamTable nodes={nodes} dsrName={dsrName} />
+			<StpTable stpNodes={stpNodes} />
 		</>
 	);
 };
 
-export default DiamHome;
+export default StpHome;

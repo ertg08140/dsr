@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { userReducer } from './reducers/userReducers';
+import { stpNodesReducer } from './reducers/stpReducers';
 import { nodeCheckReducer, prtCheckReducer } from './reducers/checkReducers';
 import {
 	alarmCheckReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
 	addAlarmToFilterReducer,
 	getAlarmListFromFilterReducer,
 	updateAlarmListFromFilterReducer,
-	helpReducer
+	helpReducer,
+	stpNodesReducer
 });
 
 const store = createStore(

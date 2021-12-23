@@ -91,7 +91,7 @@ export const nodeCheck =
 	};
 
 export const prtCheck =
-	(prtTable, eventKey = 'ala') =>
+	(prtTable, dsrName = 'ala') =>
 	async (dispatch, getState) => {
 		try {
 			dispatch({ type: PRT_CHECK_REQUEST });
@@ -107,7 +107,7 @@ export const prtCheck =
 				httpsAgent: new https.Agent({ rejectUnauthorized: false })
 			};
 
-			const url = `/${eventKey}/${process.env.REACT_APP_URL_MMI}`;
+			const url = `/${dsrName}/${process.env.REACT_APP_URL_MMI}`;
 
 			const data_prts_res = await axios.get(
 				`${url}/diameter/peerrouterules/`,
@@ -117,6 +117,7 @@ export const prtCheck =
 			const all_data_prts = data_prts_res.data.data;
 
 			const one_data_prt = all_data_prts.filter((prt) => {
+				prt.id = uuidv4();
 				return prt.peerRouteTableName === prtTable;
 			});
 

@@ -49,6 +49,10 @@ const Header = () => {
 								<Nav.Link className='py-0'>Diameter</Nav.Link>
 							</LinkContainer>
 
+							<LinkContainer to='/stp'>
+								<Nav.Link className='py-0'>STP</Nav.Link>
+							</LinkContainer>
+
 							<LinkContainer to='/help'>
 								<Nav.Link className='py-0'>Help</Nav.Link>
 							</LinkContainer>

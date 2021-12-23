@@ -1,0 +1,1 @@
+Peer defined, but no connections - fail to open diameter

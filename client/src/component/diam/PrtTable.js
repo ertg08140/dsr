@@ -18,7 +18,7 @@ const PrtTable = ({ prts }) => {
 			</thead>
 			<tbody>
 				{prts.map((prt) => (
-					<tr>
+					<tr key={prt.id}>
 						<td>{prt.name}</td>
 						<td>{prt.routeListName}</td>
 						<td>{prt.priority}</td>

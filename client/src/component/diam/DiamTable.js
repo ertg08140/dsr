@@ -13,7 +13,7 @@ import { prtCheck } from '../../reducer/actions/checkActions';
 
 import PrtModal from './PrtModal';
 
-const DiamTable = ({ nodes }) => {
+const DiamTable = ({ nodes, dsrName }) => {
 	const [showPrt, setShowPrt] = useState(false);
 	const [prtsTable, setPrtsTable] = useState([]);
 	const dispatch = useDispatch();
@@ -28,15 +28,15 @@ const DiamTable = ({ nodes }) => {
 	useEffect(() => {
 		dispatch(checkTokenValidity());
 		if (user.token) {
-			dispatch(nodeCheck());
+			dispatch(nodeCheck(dsrName));
 		} else {
 			return <Redirect to='/login' />;
 		}
-	}, [dispatch, user, prts]);
+	}, [dispatch, user.token, dsrName]);
 
 	const handlePrtClick = (e, cell) => {
 		e.preventDefault();
-		dispatch(prtCheck(cell));
+		dispatch(prtCheck(cell, dsrName));
 		setShowPrt(true);
 	};
 
@@ -68,43 +68,50 @@ const DiamTable = ({ nodes }) => {
 			dataField: 'number',
 			text: '#',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'peerNodeName',
 			text: 'Node',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'fqdn',
 			text: 'FQDN',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'realm',
 			text: 'REALM',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'peerOperationalStatus',
 			text: 'STATUS',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'ip[0]',
 			text: 'IP1',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'ip[1]',
 			text: 'IP2',
 			headerStyle: { color: 'white' },
-			sort: true
+			sort: true,
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'tcpPort',
@@ -113,7 +120,8 @@ const DiamTable = ({ nodes }) => {
 			sort: true,
 			formatter: (cell, row) => {
 				return row.tcpPort ? `TCP ${row.tcpPort}` : `SCTP ${row.sctpPort}`;
-			}
+			},
+			headerClasses: 'table-header'
 		},
 
 		{
@@ -127,7 +135,8 @@ const DiamTable = ({ nodes }) => {
 				} ${checkConnectionStatus(
 					row.connection[0].connectionOperationalReason
 				)}`;
-			}
+			},
+			headerClasses: 'table-header'
 		},
 
 		{
@@ -143,7 +152,8 @@ const DiamTable = ({ nodes }) => {
 						row.connection[1].connectionOperationalReason
 					)}`;
 				}
-			}
+			},
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'peerRouteTableName',
@@ -155,7 +165,8 @@ const DiamTable = ({ nodes }) => {
 					{' '}
 					{cell}{' '}
 				</a>
-			)
+			),
+			headerClasses: 'table-header'
 		},
 		{
 			dataField: 'peerTimeOfLastUpdate',
@@ -169,11 +180,11 @@ const DiamTable = ({ nodes }) => {
 					day: '2-digit',
 					hour: '2-digit',
 					minute: '2-digit',
-					second: '2-digit',
-					fractionalSecondDigits: 3
+					second: '2-digit'
 				});
 				return time.format(new Date(row.peerTimeOfLastUpdate));
-			}
+			},
+			headerClasses: 'table-header'
 		}
 	];
 

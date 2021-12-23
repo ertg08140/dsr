@@ -6,8 +6,7 @@ export const addId = (arrayOriginal, alarmFilterList) => {
 		alarmF.alarmOn === false ? alarmF : null
 	);
 
-	let g = 0;
-	while (g < alarmFilterListFalse.length) {
+	for (let g = 0; g < alarmFilterListFalse.length; g++) {
 		let tempArrOrig = arrayOriginal.filter((item) =>
 			item.eventNumber !== parseInt(alarmFilterListFalse[g].alarmId)
 				? item
@@ -16,7 +15,6 @@ export const addId = (arrayOriginal, alarmFilterList) => {
 
 		arrayOriginal = tempArrOrig;
 		tempArrOrig = [];
-		g++;
 	}
 
 	const arrayNew = [];
